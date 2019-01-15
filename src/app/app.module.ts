@@ -15,6 +15,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ProductProvider } from '../providers/product/product';
+import { NewProductPage } from '../pages/new-product/new-product';
+import { HttpClientModule } from '@angular/common/http';
+import { OrderProvider } from '../providers/order/order';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -32,14 +35,16 @@ export const firebaseConfig = {
     OrdersPage,
     RecordPage,
     YourProductsPage,
-    TabsPage
+    TabsPage,
+    NewProductPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,14 +53,16 @@ export const firebaseConfig = {
     OrdersPage,
     RecordPage,
     YourProductsPage,
-    TabsPage
+    TabsPage,
+    NewProductPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductProvider
+    ProductProvider,
+    OrderProvider
   ]
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NewProductPage } from '../new-product/new-product';
 
 /**
  * Generated class for the YourProductsPage page.
@@ -20,6 +21,10 @@ export class YourProductsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad YourProductsPage');
+  }
+
+  goToNewProduct(){
+    this.navCtrl.push(NewProductPage)
   }
 
 }
