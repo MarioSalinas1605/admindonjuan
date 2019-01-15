@@ -16,6 +16,8 @@ import { GpsProvider } from '../../providers/gps/gps';
   templateUrl: 'orders.html',
 })
 export class OrdersPage {
+  order: any
+  distance: Number
   orders: any = {}
   constructor(public navCtrl: NavController, public navParams: NavParams, public orderProvider: OrderProvider, public gpsProvider:GpsProvider) {
     this.orderProvider.getProducts().valueChanges().subscribe((data) => {
@@ -36,7 +38,8 @@ export class OrdersPage {
     for (let order in this.orders) {
         // onsole.log(this.orders[order].id)
         if (this.inRange(this.orders[order].markerlatlong, 10)) {
-            this.orders[order].status = "ready"
+            this.order = this.orders[order]
+            console.log(this.order)
             return true
         }
     }
@@ -60,6 +63,7 @@ export class OrdersPage {
             Math.sin(dLon/2) * Math.sin(dLon/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
+    this.distance = d
     return d;
   }
 
