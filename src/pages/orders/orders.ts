@@ -72,4 +72,8 @@ export class OrdersPage {
       return Value * Math.PI / 180;
   }
 
+  test(){
+    console.log("Yeah...!")
+  }
+
 }

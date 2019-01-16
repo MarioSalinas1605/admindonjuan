@@ -16,29 +16,45 @@
 <ion-content padding>
   <ion-card *ngIf="order">
 
-    <img src="../../assets/imgs/developer.png">
+    <!-- <img src="../../assets/imgs/developer.png">
     <ion-fab right top>
       <button ion-fab>
         <ion-icon name="pin"></ion-icon>
       </button>
-    </ion-fab>
+    </ion-fab> -->
+    <ion-card-header>
+      Artículos del pedido
+    </ion-card-header>
 
     <div *ngFor="let item of order.list">
-      <ion-item>
+      <ion-item class="item" (click)="test()">
         <ion-icon name="{{item.category}}" item-start large ></ion-icon>
         <h2>{{item.name}}</h2>
         <p>Cantidad: {{item.quantity}} Tamaño: {{item.size}}</p>
       </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Ingrese el precio"></ion-input>
+      </ion-item>
     </div>
 
-    <ion-item>
-      <span item-start>{{distance | number: '1.2-2'}} km </span>
-      <span item-start>(2.6 mi)</span>
-      <button ion-button icon-start clear item-end>
-        <ion-icon name="navigate"></ion-icon>
-        Aceptar
-      </button>
-    </ion-item>
+    <ion-row>
+      <ion-col center text-center align-self-center>
+        <span item-start>{{distance | number: '1.2-2'}} km </span>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="close-circle"></ion-icon>
+          <div>Rechazar</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button icon-start clear small>
+          <ion-icon name="send"></ion-icon>
+          <div>Aceptar</div>
+        </button>
+      </ion-col>
+    </ion-row>
 
   </ion-card>
+  
 </ion-content>
