@@ -33,6 +33,10 @@
         <p>Cantidad: {{item.quantity}} Tamaño: {{item.size}}</p>
       </ion-item>
       <ion-item>
+        <ion-label>Cantidad:</ion-label>
+        <ion-input type="number" placeholder="{{item.quantity}}" [(ngModel)]="item.quantity"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" placeholder="Ingrese el precio"></ion-input>
       </ion-item>
     </div>
@@ -48,7 +52,7 @@
         </button>
       </ion-col>
       <ion-col center text-center>
-        <button ion-button icon-start clear small>
+        <button ion-button icon-start clear small (click)="sendOrder()">
           <ion-icon name="send"></ion-icon>
           <div>Aceptar</div>
         </button>
@@ -56,5 +60,4 @@
     </ion-row>
 
   </ion-card>
-  
 </ion-content>

@@ -76,4 +76,8 @@ export class OrdersPage {
     console.log("Yeah...!")
   }
 
+  sendOrder(){
+    console.log(this.orders)
+  }
+
 }
