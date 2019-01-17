@@ -41,14 +41,29 @@ export class OrdersPage {
   }
 
   loadData(){
-    for (let order in this.orders) {
-        // onsole.log(this.orders[order].id)
-        if (this.inRange(this.orders[order].markerlatlong, 10)) {
-            this.order = this.orders[order]
-            console.log(this.order)
-            return true
+    this.storage.get('store').then((val) => {
+      if (val) {
+        for (let order in this.orders) {
+            // onsole.log(this.orders[order].id)
+            let isAnswered = false
+            for (let answer in this.orders[order].answers) {
+                if(answer == val.uid){
+                  console.log(`Orden con respuesta ${answer}`)
+                  isAnswered = true
+                }
+            }
+            if(!isAnswered){
+              if (this.inRange(this.orders[order].markerlatlong, 10)) {
+                  this.order = this.orders[order]
+                  console.log(this.order)
+                  return true
+              }
+            }
+
         }
-    }
+      }
+    })
+
     //console.log(this.orders)
   }
 
