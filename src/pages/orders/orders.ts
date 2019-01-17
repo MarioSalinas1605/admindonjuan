@@ -98,6 +98,7 @@ export class OrdersPage {
           store: val
         }
         console.log(response)
+        this.orderProvider.addOrder(response)
       }
     })
 
