@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { OrderProvider } from '../../providers/order/order';
 import { GpsProvider } from '../../providers/gps/gps';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the OrdersPage page.
@@ -19,7 +20,12 @@ export class OrdersPage {
   order: any
   distance: Number
   orders: any = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams, public orderProvider: OrderProvider, public gpsProvider:GpsProvider, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public orderProvider: OrderProvider,
+    public gpsProvider:GpsProvider,
+    public toastCtrl: ToastController,
+    private storage: Storage) {
     this.orderProvider.getProducts().valueChanges().subscribe((data) => {
       this.orders = data;
       console.log(this.orders)
@@ -77,7 +83,31 @@ export class OrdersPage {
   }
 
   sendOrder(){
-    let totalPrice = 0
+    let totalPrice = this.verifyFillPrice()
+    let store
+    if (!totalPrice) {
+        return false
+    }
+
+    this.storage.get('store').then((val) => {
+      if (val) {
+        let response = {
+          list: this.order.list,
+          totalPrice: totalPrice,
+          oid: this.order.id,
+          store: val
+        }
+        console.log(response)
+      }
+    })
+
+
+
+  }
+
+  verifyFillPrice(){
+    let totalPrice:number = 0
+
     const toast = this.toastCtrl.create({
       message: 'Completa todos los precios o pon 0 en caso de que no se tenga en existencia',
       duration: 3300,
@@ -85,15 +115,12 @@ export class OrdersPage {
     });
 
     for (let item of this.order.list) {
-      console.log(item)
         if (!item.price) {
           toast.present();
-          return false
+          return 0
         }
-        totalPrice = totalPrice + item.price
+        totalPrice = totalPrice + parseInt(item.price)
     }
-
-    
+    return totalPrice
   }
-
 }
