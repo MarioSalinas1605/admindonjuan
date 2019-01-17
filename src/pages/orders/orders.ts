@@ -77,6 +77,7 @@ export class OrdersPage {
   }
 
   sendOrder(){
+    let totalPrice = 0
     const toast = this.toastCtrl.create({
       message: 'Completa todos los precios o pon 0 en caso de que no se tenga en existencia',
       duration: 3300,
@@ -89,7 +90,10 @@ export class OrdersPage {
           toast.present();
           return false
         }
+        totalPrice = totalPrice + item.price
     }
+
+    
   }
 
 }

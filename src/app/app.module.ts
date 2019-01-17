@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -19,6 +20,9 @@ import { NewProductPage } from '../pages/new-product/new-product';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderProvider } from '../providers/order/order';
 import { GpsProvider } from '../providers/gps/gps';
+import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { CoverPage } from '../pages/cover/cover';
+import { LoginPage } from '../pages/login/login';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -37,7 +41,9 @@ export const firebaseConfig = {
     RecordPage,
     YourProductsPage,
     TabsPage,
-    NewProductPage
+    NewProductPage,
+    CoverPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,8 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,7 +62,9 @@ export const firebaseConfig = {
     RecordPage,
     YourProductsPage,
     TabsPage,
-    NewProductPage
+    NewProductPage,
+    CoverPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -64,7 +73,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProductProvider,
     OrderProvider,
-    GpsProvider
+    GpsProvider,
+    AuthenticationProvider
   ]
 })
 export class AppModule {}

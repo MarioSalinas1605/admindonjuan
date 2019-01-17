@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { NewProductPage } from '../new-product/new-product';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the YourProductsPage page.
@@ -16,7 +18,7 @@ import { NewProductPage } from '../new-product/new-product';
 })
 export class YourProductsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authenticationProvider: AuthenticationProvider, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +27,33 @@ export class YourProductsPage {
 
   goToNewProduct(){
     this.navCtrl.push(NewProductPage)
+  }
+
+  logOut(){
+    let alert = this.alertCtrl.create({
+      title: 'Fue un gusto atenderte!',
+      subTitle: 'Esperamos que vuelvas',
+      buttons: ['Ok']
+    });
+    let alertError = this.alertCtrl.create({
+      title: 'Ups!',
+      subTitle: 'Hubo un error',
+      buttons: ['Ok']
+    });
+
+    this.authenticationProvider.logOut()
+    .then(
+      (data)=>{
+        alert.present();
+        console.log(data)
+        this.navCtrl.setRoot(LoginPage);
+      }
+    ).catch(
+      (error)=>{
+        alertError.present();
+        console.log(error)
+      }
+    )
   }
 
 }

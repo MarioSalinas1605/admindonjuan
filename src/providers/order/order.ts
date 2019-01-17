@@ -18,4 +18,8 @@ export class OrderProvider {
   public getProducts(){
     return this.afDB.list('orders/')
   }
+
+  public addOrder(order) {
+    return this.afDB.object('orders/' + order.id + '/' + order.idStore).set(order);
+  }
 }
