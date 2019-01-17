@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { OrderProvider } from '../../providers/order/order';
 import { GpsProvider } from '../../providers/gps/gps';
 
@@ -19,7 +19,7 @@ export class OrdersPage {
   order: any
   distance: Number
   orders: any = {}
-  constructor(public navCtrl: NavController, public navParams: NavParams, public orderProvider: OrderProvider, public gpsProvider:GpsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public orderProvider: OrderProvider, public gpsProvider:GpsProvider, public toastCtrl: ToastController) {
     this.orderProvider.getProducts().valueChanges().subscribe((data) => {
       this.orders = data;
       console.log(this.orders)
@@ -77,7 +77,19 @@ export class OrdersPage {
   }
 
   sendOrder(){
-    console.log(this.orders)
+    const toast = this.toastCtrl.create({
+      message: 'Completa todos los precios o pon 0 en caso de que no se tenga en existencia',
+      duration: 3300,
+      position: 'top'
+    });
+
+    for (let item of this.order.list) {
+      console.log(item)
+        if (!item.price) {
+          toast.present();
+          return false
+        }
+    }
   }
 
 }
