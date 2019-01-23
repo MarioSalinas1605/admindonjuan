@@ -43,8 +43,9 @@ export class OrdersPage {
   loadData(){
     this.storage.get('store').then((val) => {
       if (val) {
+        console.log(val)
         for (let order in this.orders) {
-            // onsole.log(this.orders[order].id)
+            console.log(this.orders[order].id)
             let isAnswered = false
             for (let answer in this.orders[order].answers) {
                 if(answer == val.uid){
@@ -99,6 +100,8 @@ export class OrdersPage {
 
   sendOrder(){
     let totalPrice = this.verifyFillPrice()
+    let distance = this.CalcDistanceBetween(this.gpsProvider.lat, this.gpsProvider.lon, this.order.markerlatlong.lat, this.order.markerlatlong.lng)
+    console.log(`La distancia de la tienda final es: ${distance}`)
     let store
     if (!totalPrice) {
         return false
@@ -110,7 +113,8 @@ export class OrdersPage {
           list: this.order.list,
           totalPrice: totalPrice,
           oid: this.order.id,
-          store: val
+          store: val,
+          distance: distance
         }
         console.log(response)
         this.orderProvider.addOrder(response)
