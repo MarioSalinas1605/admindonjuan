@@ -99,6 +99,11 @@ export class OrdersPage {
   }
 
   sendOrder(){
+    const toast = this.toastCtrl.create({
+      message: 'Presupuesto enviado',
+      duration: 3300,
+      position: 'top'
+    });
     let totalPrice = this.verifyFillPrice()
     let distance = this.CalcDistanceBetween(this.gpsProvider.lat, this.gpsProvider.lon, this.order.markerlatlong.lat, this.order.markerlatlong.lng)
     console.log(`La distancia de la tienda final es: ${distance}`)
@@ -118,9 +123,11 @@ export class OrdersPage {
         }
         console.log(response)
         this.orderProvider.addOrder(response)
+        toast.present();
+        this.loadData();
+        this.order = null
       }
     })
-
 
 
   }
