@@ -76,24 +76,25 @@ export class LoginPage {
       buttons: ['Ok']
     });
 
-    let shop = {
+    let store = {
+      id: null,
       name: this.name,
       email: this.email,
-      address: '',
-      store: true
+      address: ''
     }
 
     if (this.password == this.password2) {
-        console.log(shop)
+        console.log("Contraseñas iguales")
     }
 
     this.authenticationProvider.registerWithEmail(this.email, this.password)
     .then(
       (data)=>{
-        this.authenticationProvider.addShop(shop).then((data2)=>{
+        store.id = data.user.uid
+        this.authenticationProvider.addShop(store).then((data2)=>{
           alert.present();
-          console.log(data.user)
-          let obj: any = {uid: data.user.uid, email: data.user.email}
+          console.log(data.user.uid)
+          let obj = {uid: data.user.uid, email: data.user.email}
           this.storage.set('store', obj);
         })
         .catch((error)=>{

@@ -33,6 +33,6 @@ export class AuthenticationProvider {
   }
 
   public addShop(shop) {
-    return this.afDB.object('shops/' + shop.id).set(shop);
+    return this.afDB.object('stores/' + shop.id).set(shop);
   }
 }
