@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { StoreProvider } from '../../providers/store/store';
 import { Storage } from '@ionic/storage';
+import { RecordProvider } from '../../providers/record/record';
 
 /**
  * Generated class for the InProcessPage page.
@@ -21,6 +22,8 @@ export class InProcessPage {
   constructor(public navCtrl: NavController,
     public storeProvider: StoreProvider,
     private storage: Storage,
+    public alertController: AlertController,
+    public recordProvider: RecordProvider,
     public navParams: NavParams) {
   }
 
@@ -40,5 +43,47 @@ export class InProcessPage {
     })
   }
 
+  async presentAlertConfirm(item) {
+    const alert = await this.alertController.create({
+      title: 'Confirmación',
+      message: '¿Como quiere finalizar la orden?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+            this.addProcessOrderHistory(item, "cancel")
+            this.deleteProcessOrder(item)
+          }
+        }, {
+          text: 'Entregada',
+          handler: () => {
+            this.addProcessOrderHistory(item, "ok")
+            this.deleteProcessOrder(item)
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  addProcessOrderHistory(item, status){
+    console.log('Confirm Okay');
+    if (status=="ok") {
+      item.status = "ok"
+    }else{
+      item.status = "cancel"
+    }
+    this.recordProvider.addToStore(item)
+    this.recordProvider.addToUser(item)
+    console.log(item)
+  }
+
+  deleteProcessOrder(item){
+    this.recordProvider.deleteFromStore(item)
+    this.recordProvider.deleteFromUser(item)
+  }
 
 }

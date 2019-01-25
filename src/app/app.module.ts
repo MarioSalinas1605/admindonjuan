@@ -25,6 +25,7 @@ import { CoverPage } from '../pages/cover/cover';
 import { LoginPage } from '../pages/login/login';
 import { StoreProvider } from '../providers/store/store';
 import { InProcessPage } from '../pages/in-process/in-process';
+import { RecordProvider } from '../providers/record/record';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -79,7 +80,8 @@ export const firebaseConfig = {
     OrderProvider,
     GpsProvider,
     AuthenticationProvider,
-    StoreProvider
+    StoreProvider,
+    RecordProvider
   ]
 })
 export class AppModule {}
