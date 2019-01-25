@@ -31,8 +31,4 @@ export class AuthenticationProvider {
   logOut(){
     return this.angularFireAuth.auth.signOut()
   }
-
-  public addShop(shop) {
-    return this.afDB.object('stores/' + shop.id).set(shop);
-  }
 }

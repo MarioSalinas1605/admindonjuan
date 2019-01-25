@@ -23,6 +23,7 @@ import { GpsProvider } from '../providers/gps/gps';
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { CoverPage } from '../pages/cover/cover';
 import { LoginPage } from '../pages/login/login';
+import { StoreProvider } from '../providers/store/store';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -74,7 +75,8 @@ export const firebaseConfig = {
     ProductProvider,
     OrderProvider,
     GpsProvider,
-    AuthenticationProvider
+    AuthenticationProvider,
+    StoreProvider
   ]
 })
 export class AppModule {}
