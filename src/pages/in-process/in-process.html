@@ -14,5 +14,30 @@
 
 
 <ion-content padding>
-
+  <div *ngFor="let item of list">
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          Pedido # {{item.oid}}
+        </ion-card-title>
+        <p>
+          Lista de productos:
+        </p>
+        <ion-list *ngFor="let product of item.list">
+          <ion-item>
+            <ion-label>{{product.name }} - ${{product.price}}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-label>Costo total: ${{item.price}}</ion-label>
+        <ion-row>
+          <ion-col col-5 >
+            <button ion-button full>Ubicación</button>
+          </ion-col>
+          <ion-col col-5 offset-2>
+            <button ion-button full>Finalizar</button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
