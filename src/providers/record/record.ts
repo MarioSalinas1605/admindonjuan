@@ -17,7 +17,7 @@ export class RecordProvider {
   }
 
   get(uid){
-    return this.afDB.list('users/' + uid + '/records/')
+    return this.afDB.list('stores/' + uid + '/records/')
   }
 
   public addToStore(order) {
