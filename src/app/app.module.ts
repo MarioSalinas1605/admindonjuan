@@ -26,6 +26,7 @@ import { LoginPage } from '../pages/login/login';
 import { StoreProvider } from '../providers/store/store';
 import { InProcessPage } from '../pages/in-process/in-process';
 import { RecordProvider } from '../providers/record/record';
+import { InformationPage } from '../pages/information/information';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -47,7 +48,8 @@ export const firebaseConfig = {
     NewProductPage,
     CoverPage,
     LoginPage,
-    InProcessPage
+    InProcessPage,
+    InformationPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ export const firebaseConfig = {
     NewProductPage,
     CoverPage,
     LoginPage,
-    InProcessPage
+    InProcessPage,
+    InformationPage
   ],
   providers: [
     StatusBar,

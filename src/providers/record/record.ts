@@ -16,6 +16,10 @@ export class RecordProvider {
     console.log('Hello RecordProvider Provider');
   }
 
+  get(uid){
+    return this.afDB.list('users/' + uid + '/records/')
+  }
+
   public addToStore(order) {
     return this.afDB.object('stores/'+order.sid+'/records/' + order.oid).set(order);
   }

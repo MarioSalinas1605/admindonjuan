@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OrdersPage } from '../orders/orders';
-import { YourProductsPage } from '../your-products/your-products';
 import { InProcessPage } from '../in-process/in-process';
+import { InformationPage } from '../information/information';
 
 /**
  * Generated class for the TabsPage page.
@@ -19,7 +19,7 @@ import { InProcessPage } from '../in-process/in-process';
 export class TabsPage {
   tab1Root = OrdersPage
   tab2Root = InProcessPage
-  tab3Root = YourProductsPage
+  tab3Root = InformationPage
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
