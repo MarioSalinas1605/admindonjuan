@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { OrdersPage } from '../pages/orders/orders';
@@ -27,6 +28,7 @@ import { StoreProvider } from '../providers/store/store';
 import { InProcessPage } from '../pages/in-process/in-process';
 import { RecordProvider } from '../providers/record/record';
 import { InformationPage } from '../pages/information/information';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -75,6 +77,7 @@ export const firebaseConfig = {
     InformationPage
   ],
   providers: [
+    CallNumber,
     StatusBar,
     SplashScreen,
     AngularFireDatabase,

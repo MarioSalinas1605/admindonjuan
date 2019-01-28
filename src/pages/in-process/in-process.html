@@ -29,11 +29,12 @@
           </ion-item>
         </ion-list>
         <ion-label>Costo total: ${{item.price}}</ion-label>
+        <a href="tel:{{item.user.number}}">Llamar {{item.user.number}}</a>
         <ion-row>
-          <ion-col col-5 >
+          <ion-col col-4 offset-1>
             <button ion-button full (click)="toMaps(item)">Ubicación</button>
           </ion-col>
-          <ion-col col-5 offset-2>
+          <ion-col col-4 offset-2>
             <button ion-button full (click)="presentAlertConfirm(item)">Finalizar</button>
           </ion-col>
         </ion-row>
