@@ -86,4 +86,9 @@ export class InProcessPage {
     this.recordProvider.deleteFromUser(item)
   }
 
+  toMaps(item){
+    console.log("https://maps.google.com/?q="+item.markerlatlong.lat+","+item.markerlatlong.lng)
+    window.location.href="https://maps.google.com/?q="+item.markerlatlong.lat+","+item.markerlatlong.lng;
+  }
+
 }
