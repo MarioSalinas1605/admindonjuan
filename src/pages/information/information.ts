@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { RecordProvider } from '../../providers/record/record';
 import { AlertController } from 'ionic-angular';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { LoginPage } from '../login/login';
+import { EditInformationPage } from '../edit-information/edit-information';
 
 /**
  * Generated class for the InformationPage page.
@@ -25,6 +26,7 @@ export class InformationPage {
     public navParams: NavParams,
     private recordProvider: RecordProvider,
     private alertCtrl: AlertController,
+    public modalCtrl: ModalController,
     private authenticationProvider: AuthenticationProvider,
     private storage: Storage) {
   }
@@ -73,6 +75,12 @@ export class InformationPage {
         console.log(error)
       }
     )
+  }
+
+  sendtToEdit(store){
+    console.log(store)
+    const modal = this.modalCtrl.create(EditInformationPage, {store:store, "parentPage": this});
+    modal.present();
   }
 
 }

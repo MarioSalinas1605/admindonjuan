@@ -29,6 +29,7 @@ import { InProcessPage } from '../pages/in-process/in-process';
 import { RecordProvider } from '../providers/record/record';
 import { InformationPage } from '../pages/information/information';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { EditInformationPage } from '../pages/edit-information/edit-information';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCMjs-827aomemKULQ5uFXuR_w06Higk0s",
@@ -51,7 +52,8 @@ export const firebaseConfig = {
     CoverPage,
     LoginPage,
     InProcessPage,
-    InformationPage
+    InformationPage,
+    EditInformationPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ export const firebaseConfig = {
     CoverPage,
     LoginPage,
     InProcessPage,
-    InformationPage
+    InformationPage,
+    EditInformationPage
   ],
   providers: [
     CallNumber,
