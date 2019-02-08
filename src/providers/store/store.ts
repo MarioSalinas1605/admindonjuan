@@ -19,6 +19,10 @@ export class StoreProvider {
     return this.afDB.object('stores/' + shop.id).set(shop);
   }
 
+  public get(sid){
+    return this.afDB.object('stores/' + sid + '/information');
+  }
+
   public getOrderProcess(uid){
     return this.afDB.list('stores/' + uid + '/process/')
   }
