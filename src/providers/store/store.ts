@@ -16,11 +16,11 @@ export class StoreProvider {
   }
 
   public addStore(shop) {
-    return this.afDB.object('stores/' + shop.id).set(shop);
+    return this.afDB.object('stores/' + shop.id + '/information/').set(shop);
   }
 
   public get(sid){
-    return this.afDB.object('stores/' + sid + '/information');
+    return this.afDB.object('stores/' + sid + '/information/');
   }
 
   public getOrderProcess(uid){
