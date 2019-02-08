@@ -23,6 +23,7 @@ export class LoginPage {
   email: string = ''
   password: string = ''
   password2: string = ''
+  number: number = 0
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private authenticationProvider: AuthenticationProvider,
@@ -84,7 +85,8 @@ export class LoginPage {
       id: null,
       name: this.name,
       email: this.email,
-      address: ''
+      address: '',
+      number: this.number
     }
 
     if (this.password == this.password2) {
@@ -99,7 +101,7 @@ export class LoginPage {
           alert.present();
           console.log(data.user.uid)
           let obj = {uid: data.user.uid, email: data.user.email}
-          this.storage.set('store', obj);
+          this.storage.set('store', store);
         })
         .catch((error)=>{
           alertError.present()
