@@ -18,15 +18,16 @@
       Tienda
     </ion-card-header>
 
-    <ion-card-content>
+    <ion-card-content *ngIf="store">
       <ion-grid>
         <ion-row>
           <ion-col col-4>
             <img src="/assets/imgs/developer.png" alt="">
           </ion-col>
           <ion-col col-5>
-            <!-- <h2>{{store.name}}</h2> -->
-            <p>Tel: 2225079935</p>
+            <h2>{{store.name}}</h2>
+            <p>{{store.email}}</p>
+            <!-- <p>Tel: {{store.number}}</p> -->
           </ion-col>
           <ion-col col-3>
             <button ion-button>Editar</button>

@@ -53,9 +53,11 @@ export class LoginPage {
       (data)=>{
         alert.present();
         console.log(data.user)
-        let obj: any = {uid: data.user.uid, email: data.user.email}
-        this.storage.set('store', obj);
-        this.navCtrl.setRoot(TabsPage);
+        this.storeProvider.get(data.user.uid).valueChanges().subscribe((store)=>{
+          console.log(store)
+          this.storage.set('store', store);
+          this.navCtrl.setRoot(TabsPage);
+        })
       }
     ).catch(
       (error)=>{

@@ -38,7 +38,7 @@ export class InformationPage {
       if(val){
         this.store = val
         console.log(this.store)
-        this.recordProvider.get(this.store.uid).valueChanges().subscribe((data)=>{
+        this.recordProvider.get(this.store.id).valueChanges().subscribe((data)=>{
           if(data){
             this.listRecords = data
             console.log(this.listRecords)
