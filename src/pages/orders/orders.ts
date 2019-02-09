@@ -48,7 +48,7 @@ export class OrdersPage {
             console.log(this.orders[order].id)
             let isAnswered = false
             for (let answer in this.orders[order].answers) {
-                if(answer == val.uid){
+                if(answer == val.id){
                   console.log(`Orden con respuesta ${answer}`)
                   isAnswered = true
                 }
