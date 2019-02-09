@@ -23,7 +23,7 @@ export class LoginPage {
   email: string = ''
   password: string = ''
   password2: string = ''
-  number: number = 0
+  number: number
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private authenticationProvider: AuthenticationProvider,
@@ -75,46 +75,73 @@ export class LoginPage {
       subTitle: 'Te has registrado de manera correcta',
       buttons: ['Ok']
     });
+
     let alertError = this.alertCtrl.create({
       title: 'Ups!',
       subTitle: 'Hubo un error',
       buttons: ['Ok']
     });
 
-    let store = {
-      id: null,
-      name: this.name,
-      email: this.email,
-      address: '',
-      number: this.number
-    }
+    if(this.verifydata()){
+      let store = {
+        id: null,
+        name: this.name,
+        email: this.email,
+        address: '',
+        number: this.number
+      }
 
-    if (this.password == this.password2) {
-        console.log("Contraseñas iguales")
-    }
-
-    this.authenticationProvider.registerWithEmail(this.email, this.password)
-    .then(
-      (data)=>{
-        store.id = data.user.uid
-        this.storeProvider.addStore(store).then((data2)=>{
-          alert.present();
-          console.log(data.user.uid)
-          let obj = {uid: data.user.uid, email: data.user.email}
-          this.storage.set('store', store);
-        })
-        .catch((error)=>{
-          alertError.present()
+      this.authenticationProvider.registerWithEmail(this.email, this.password)
+      .then(
+        (data)=>{
+          store.id = data.user.uid
+          this.storeProvider.addStore(store).then((data2)=>{
+            alert.present();
+            console.log(data.user.uid)
+            let obj = {uid: data.user.uid, email: data.user.email}
+            this.storage.set('store', store);
+          })
+          .catch((error)=>{
+            alertError.present()
+            console.log(error)
+          })
+        }
+      ).catch(
+        (error)=>{
+          alertError.present();
           console.log(error)
-        })
-      }
-    ).catch(
-      (error)=>{
-        alertError.present();
-        console.log(error)
-      }
-    )
+        }
+      )
+    }
+  }
 
+  verifydata(){
+    let alertPassword = this.alertCtrl.create({
+      title: 'Verificar',
+      subTitle: 'Las contraseñas deben ser iguales',
+      buttons: ['Ok']
+    });
+
+    let alertInput = this.alertCtrl.create({
+      title: 'Verificar',
+      subTitle: 'Completa todos los campos',
+      buttons: ['Ok']
+    });
+
+    if (this.password != this.password2) {
+        console.log("Contraseñas iguales")
+        alertPassword.present()
+        return false;
+    }
+    if(this.name == ''){
+      alertInput.present()
+      return false;
+    }
+    if(this.number == null){
+      alertInput.present()
+      return false;
+    }
+    return true;
   }
 
 }
