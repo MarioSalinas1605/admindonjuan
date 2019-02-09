@@ -133,6 +133,18 @@ export class LoginPage {
         alertPassword.present()
         return false;
     }
+    if(this.password==''){
+      alertInput.present()
+      return false;
+    }
+    if(this.password2==''){
+      alertInput.present()
+      return false;
+    }
+    if(this.email==''){
+      alertInput.present()
+      return false;
+    }
     if(this.name == ''){
       alertInput.present()
       return false;
