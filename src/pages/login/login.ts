@@ -38,11 +38,6 @@ export class LoginPage {
   }
 
   login(){
-    let alert = this.alertCtrl.create({
-      title: 'Perfecto!',
-      subTitle: 'Has ingresado a tu cuenta',
-      buttons: ['Ok']
-    });
     let alertError = this.alertCtrl.create({
       title: 'Ups!',
       subTitle: 'Hubo un error',
@@ -66,7 +61,6 @@ export class LoginPage {
     this.authenticationProvider.loginWithEmail(this.email, this.password)
     .then(
       (data)=>{
-        alert.present();
         console.log(data.user)
         this.storeProvider.get(data.user.uid).valueChanges().subscribe((store)=>{
           console.log(store)
@@ -101,7 +95,7 @@ export class LoginPage {
         id: null,
         name: this.name,
         email: this.email,
-        address: '',
+        latLng: null,
         number: this.number
       }
 

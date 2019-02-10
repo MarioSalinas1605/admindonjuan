@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { OrderProvider } from '../../providers/order/order';
-import { GpsProvider } from '../../providers/gps/gps';
 import { Storage } from '@ionic/storage';
 
 /**
@@ -20,19 +19,35 @@ export class OrdersPage {
   order: any
   distance: Number
   orders: any = {}
+  store
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public orderProvider: OrderProvider,
-    public gpsProvider:GpsProvider,
     public toastCtrl: ToastController,
+    private alertCtrl: AlertController,
     private storage: Storage) {
     this.orderProvider.getProducts().valueChanges().subscribe((data) => {
       this.orders = data;
       console.log(this.orders)
-      this.loadData()
       //console.log(`Coordinates Lat: ${gpsProvider.lat} Lon: ${gpsProvider.lon}`)
     }, (error) => {
       console.log(error);
+    })
+    this.verifygps()
+  }
+
+  verifygps(){
+    this.storage.get('store').then(val=>{
+      if(val){
+        if(val.latLng == null){
+          let alertGPS = this.alertCtrl.create({
+            title: 'Escoge una ubicación',
+            subTitle: 'Ve a la sección información y presiona el boton editar.',
+            buttons: ['Ok']
+          });
+          alertGPS.present();
+        }
+      }
     })
   }
 
@@ -45,7 +60,8 @@ export class OrdersPage {
 
   loadData(){
     this.storage.get('store').then((val) => {
-      if (val) {
+      this.store = val
+      if (val.latLng != null) {
         console.log(val)
         for (let order in this.orders) {
             console.log(this.orders[order].id)
@@ -72,8 +88,8 @@ export class OrdersPage {
   }
 
   inRange(marker, distance){
-    if (this.CalcDistanceBetween(this.gpsProvider.lat, this.gpsProvider.lon, marker.lat, marker.lng) < distance) {
-      console.log(`Distancia: ${this.CalcDistanceBetween(this.gpsProvider.lat, this.gpsProvider.lon, marker.lat, marker.lng)}`)
+    if (this.CalcDistanceBetween(this.store.latLng.lat, this.store.latLng.lng, marker.lat, marker.lng) < distance) {
+      console.log(`Distancia: ${this.CalcDistanceBetween(this.store.latLng.lat, this.store.latLng.lng, marker.lat, marker.lng)}`)
       return true
     }
   }
@@ -108,7 +124,7 @@ export class OrdersPage {
       position: 'top'
     });
     let totalPrice = this.verifyFillPrice()
-    let distance = this.CalcDistanceBetween(this.gpsProvider.lat, this.gpsProvider.lon, this.order.markerlatlong.lat, this.order.markerlatlong.lng)
+    let distance = this.CalcDistanceBetween(this.store.latLng.lat, this.store.latLng.lng, this.order.markerlatlong.lat, this.order.markerlatlong.lng)
     console.log(`La distancia de la tienda final es: ${distance}`)
     let store
     if (!totalPrice) {

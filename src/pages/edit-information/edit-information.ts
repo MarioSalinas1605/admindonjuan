@@ -11,7 +11,7 @@ import {
   Environment
 } from '@ionic-native/google-maps';
 import { StoreProvider } from '../../providers/store/store';
-import { GpsProvider } from '../../providers/gps/gps';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the EditInformationPage page.
@@ -33,7 +33,7 @@ export class EditInformationPage {
     public viewCtrl: ViewController,
     private googleMaps: GoogleMaps,
     public toastCtrl: ToastController,
-    public gpsProvider: GpsProvider,
+    private storage: Storage,
     private storeProvider: StoreProvider,
     public navParams: NavParams) {
     this.store = navParams.get('store')
@@ -113,9 +113,14 @@ export class EditInformationPage {
       duration: 3300,
       position: 'top'
     });
+
     this.storeProvider.setLatLng(this.store.id, this.latLng).then((data)=>{
-      this.gpsProvider.setLatLng(this.latLng)
-      toast.present();
+      this.storage.get('store').then((data)=>{
+        data.latLng = this.latLng
+        console.log(data)
+        this.storage.set('store', data);
+        toast.present();
+      })
     })
     .catch(error=>{
       console.log(error)
