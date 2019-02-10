@@ -19,6 +19,7 @@
 
 
 <ion-content padding>
+  <div id="map_canvas"></div>
   <ion-grid *ngIf="store">
     <ion-row justify-content-center>
       <ion-col col-10 offset-1>
@@ -43,10 +44,10 @@
     </ion-row>
     <ion-row padding>
       <ion-col col-6>
-        <button ion-button full (click)="deleteItem()">Eliminar producto</button>
+        <button ion-button full (click)="deleteItem()">Guardar ubicación</button>
       </ion-col>
       <ion-col col-6>
-        <button ion-button full (click)="modifyItem()">Guardar Cambios</button>
+        <button ion-button full (click)="modifyItem()">Guardar datos</button>
       </ion-col>
     </ion-row>
   </ion-grid>
