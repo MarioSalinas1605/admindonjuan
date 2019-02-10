@@ -23,6 +23,10 @@ export class StoreProvider {
     return this.afDB.object('stores/' + sid + '/information/');
   }
 
+  public setLatLng(sid, latLng){
+    return this.afDB.object('stores/' + sid + '/information/latLng').set(latLng);
+  }
+
   public getOrderProcess(uid){
     return this.afDB.list('stores/' + uid + '/process/')
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import {
   GoogleMaps,
   GoogleMap,
@@ -10,6 +10,7 @@ import {
   Marker,
   Environment
 } from '@ionic-native/google-maps';
+import { StoreProvider } from '../../providers/store/store';
 
 /**
  * Generated class for the EditInformationPage page.
@@ -26,9 +27,12 @@ import {
 export class EditInformationPage {
   store
   map: GoogleMap;
+  latLng
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
     private googleMaps: GoogleMaps,
+    public toastCtrl: ToastController,
+    private storeProvider: StoreProvider,
     public navParams: NavParams) {
     this.store = navParams.get('store')
     console.log(this.store)
@@ -78,6 +82,7 @@ export class EditInformationPage {
   getPosition(): void{
     this.map.getMyLocation()
     .then(response => {
+      this.latLng = response.latLng;
       this.map.moveCamera({
         target: response.latLng
       });
@@ -85,12 +90,33 @@ export class EditInformationPage {
         title: 'My Position',
         icon: 'blue',
         animation: 'DROP',
-        position: response.latLng
+        position: response.latLng,
+        draggable: true
       });
     })
     .catch(error =>{
       console.log(error);
     });
+  }
+
+  setUbication(){
+    if (this.store.id == null) {
+        return false
+    }
+    if(this.latLng == null){
+      return false
+    }
+    const toast = this.toastCtrl.create({
+      message: 'Ubicación guardada',
+      duration: 3300,
+      position: 'top'
+    });
+    this.storeProvider.setLatLng(this.store.id, this.latLng).then((data)=>{
+      toast.present();
+    })
+    .catch(error=>{
+      console.log(error)
+    })
   }
 
 }
