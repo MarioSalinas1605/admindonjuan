@@ -39,6 +39,9 @@ export class OrdersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
   }
+  ionViewWillEnter(){
+    this.loadData()
+  }
 
   loadData(){
     this.storage.get('store').then((val) => {

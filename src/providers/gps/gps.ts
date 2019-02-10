@@ -15,4 +15,12 @@ export class GpsProvider {
     console.log('Hello GpsProvider Provider');
   }
 
+  public setLatLng(latLng){
+    this.lat = latLng.lat
+    this.lon = latLng.lng
+    console.log(this.lat)
+    console.log(this.lon)
+    return true
+  }
+
 }
