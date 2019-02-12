@@ -20,6 +20,6 @@ export class OrderProvider {
   }
 
   public addOrder(order) {
-    return this.afDB.object('orders/' + order.oid + '/' + 'answers/'+ order.store.uid).set(order);
+    return this.afDB.object('orders/' + order.oid + '/' + 'answers/'+ order.store.id).set(order);
   }
 }

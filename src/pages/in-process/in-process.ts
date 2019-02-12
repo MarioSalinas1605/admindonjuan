@@ -33,7 +33,7 @@ export class InProcessPage {
       console.log(data)
       if(data){
         this.store = data
-        this.storeProvider.getOrderProcess(data.uid).valueChanges().subscribe((sdata)=>{
+        this.storeProvider.getOrderProcess(this.store.id).valueChanges().subscribe((sdata)=>{
           console.log(sdata)
           if(sdata){
             this.list = sdata
